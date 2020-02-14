@@ -1,0 +1,57 @@
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /* always do this if we wanna give some padding or height or width to elements */
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: #fff;
+    }
+  }
+
+  &::after {
+    content: ""; /* basically copying properties from .btn / parent element mostly */
+    display: inline-block;
+    height: 100%; /* percentage of parent (the [.btn]::after part, meaning btn class */
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute; /* this works in relation to the closest pos: relative it can find, why we have to make the btn class pos:relative */
+    top: 0;
+    left: 0;
+    z-index: -1; /* place behind org btn */
+    transition: all 0.4s;
+  }
+
+  &:hover::after {
+    /* an after pseudo element, only on the hover state of the btn */
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+    /* we want to make this a transition, where do we put it? On the initial state! Which is the .btn::after selector */
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    animation-fill-mode: backwards; /* automatically applies the styles of the 0% before the animation starts! */
+  }
+}
