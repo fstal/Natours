@@ -30,6 +30,15 @@
     }
   }
 
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
   &::after {
     content: ""; /* basically copying properties from .btn / parent element mostly */
     display: inline-block;
