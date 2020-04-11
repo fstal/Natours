@@ -22,15 +22,20 @@
     width: 15rem;
     height: 15rem;
     float: left;
-    -webkit-shape-outside: circle(50% at 50% 50%);
-    shape-outside: circle(
-      50% at 50% 50%
-    ); // first param is radius - 50% of 15rem makes it 7.5rem. Diameter is then 100%. After at is center of circle. Element has to be floated
-    // requires: floated, defined height and width
-    clip-path: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
+
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+    overflow: hidden;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      -webkit-clip-path: circle(50% at 50% 50%);
+      clip-path: circle(50% at 50% 50%);
+      -webkit-shape-outside: circle(50% at 50% 50%);
+      shape-outside: circle(
+        50% at 50% 50%
+      ); // first param is radius - 50% of 15rem makes it 7.5rem. Diameter is then 100%. After at is center of circle. Element has to be floated
+      // requires: floated, defined height and width
+    }
 
     @include respond(phone) {
       transform: translateX(-3rem) skewX(0);
